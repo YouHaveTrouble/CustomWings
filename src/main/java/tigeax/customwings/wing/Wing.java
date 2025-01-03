@@ -16,7 +16,6 @@ import tigeax.customwings.CWPlayer;
 import tigeax.customwings.CustomWings;
 import tigeax.customwings.configuration.Config;
 import tigeax.customwings.configuration.WingConfig;
-import tigeax.customwings.nms.NMSSupport;
 import tigeax.customwings.util.Util;
 
 public class Wing {
@@ -130,14 +129,14 @@ public class Wing {
 
 	private void showWing(CWPlayer wingOwner, int animationState) {
 
-        if (wingOwner.getShowWing()) {
-            if (wingOwner.isPreviewingWing()) {
-                Location wingLoc = wingOwner.getPreviewWingLocation();
-                spawnPreviewWing(wingLoc, animationState);
-            } else {
-                spawnAttachedWing(wingOwner, animationState);
-            }
-        }
+		if (wingOwner.getShowWing()) {
+			if (wingOwner.isPreviewingWing()) {
+				Location wingLoc = wingOwner.getPreviewWingLocation();
+				spawnPreviewWing(wingLoc, animationState);
+			} else {
+				spawnAttachedWing(wingOwner, animationState);
+			}
+		}
 	}
 
 	private void spawnPreviewWing(Location wingLoc, int animationState) {
@@ -168,7 +167,7 @@ public class Wing {
 
 		// Instead of using the Yaw of the head of the player we will try to use the Yaw
 		// of the player's body
-		float bodyYaw = NMSSupport.getBodyRotation(wingOwner);
+		float bodyYaw = wingOwner.getBodyYaw();
 		wingLoc.setYaw(bodyYaw);
 
 		// Shift the wing down if the player is sneaking
@@ -227,7 +226,7 @@ public class Wing {
 		return true;
 	}
 
-	
+
 	/**
 	 * Get the players that are able to see a previewed wing
 	 * @param wingLoc Location the wing is spawned at
@@ -313,7 +312,7 @@ public class Wing {
 
 	/**
 	 * Spawn the wing for a list of players
-	 * 
+	 *
 	 * @param wingLoc Location to spawn the wing
 	 * @param players Players to spawn the wing for
 	 */
@@ -352,8 +351,8 @@ public class Wing {
 	 * Return the location the particle should be spawned at
 	 * Relative to the location the wing is spawned at
 	 * Based on the x and y offset from the center of the wing and which side of the Wing the particle is on
-	 * 
-	 * @param loc 
+	 *
+	 * @param loc
 	 * @param x
 	 * @param y
 	 * @param wingSide
@@ -380,7 +379,7 @@ public class Wing {
 
 	/**
 	 * Get if a wing should be shown in a world
-	 * 
+	 *
 	 * @param world The world the wing is shown in
 	 * @return
 	 */

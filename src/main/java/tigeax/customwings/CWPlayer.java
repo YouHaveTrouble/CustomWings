@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 
 import tigeax.customwings.configuration.WingConfig;
 import tigeax.customwings.configuration.settings.Setting;
-import tigeax.customwings.nms.NMSSupport;
 import tigeax.customwings.util.Util;
 import tigeax.customwings.util.menu.ItemMenu;
 import tigeax.customwings.wing.Wing;
@@ -26,7 +25,7 @@ public class CWPlayer {
 	private Wing currentWing;
 
 	private boolean hideOtherPlayerWings;
-    private boolean showWing;
+	private boolean showWing;
 	private String wingFilter;
 
 	private Setting waitingSetting;
@@ -58,7 +57,7 @@ public class CWPlayer {
 	/**
 	 * Own implmentaton to send a message to a player using
 	 * {@link Util#sendMessage(CommandSender, String)}.
-	 * 
+	 *
 	 * @param message Message to send
 	 */
 	public void sendMessage(String message) {
@@ -67,7 +66,7 @@ public class CWPlayer {
 
 	/**
 	 * Get the wing the player has equpped. Returns null if no wing is equipped.
-	 * 
+	 *
 	 * @return Wing or null
 	 */
 	public Wing getEquippedWing() {
@@ -94,18 +93,18 @@ public class CWPlayer {
 
 	}
 
-    public boolean getShowWing() {
+	public boolean getShowWing() {
 		return showWing;
 	}
 
-    public void setShowWing(boolean show) {
-        
-        if (showWing == show) return;
+	public void setShowWing(boolean show) {
 
-        // Save player's show state to storage
+		if (showWing == show) return;
+
+		// Save player's show state to storage
 		CustomWings.getInstance().getDatabase().savePlayerShowWing(getPlayer(), show);
 
-        showWing = show;
+		showWing = show;
 	}
 
 	public boolean isPreviewingWing() {
@@ -116,7 +115,7 @@ public class CWPlayer {
 
 		if (previewing) {
 			Location loc = getPlayer().getLocation();
-			loc.setYaw(NMSSupport.getBodyRotation(getPlayer()));
+			loc.setYaw(getPlayer().getBodyYaw());
 			wingPreviewLocation = loc;
 		} else {
 			wingPreviewLocation = null;
